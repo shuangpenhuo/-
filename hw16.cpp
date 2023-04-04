@@ -101,6 +101,33 @@ set<string> ReplacementCensor(istream &text_in, ostream &out1, map<string,string
     return a;
 }
 
+template <typename tname>
+vector<tname> MaxVector(vector<tname> vec1, vector<tname> vec2){
+    int size1 = vec1.size(), size2 = vec2.size(), max_size;
+    max_size = max(size1, size2);
+    vector<tname> result_f(max_size);
+    if(size1 == size2){
+        transform(vec1.begin(), vec1.end(), vec2.begin(), result_f.begin(), [](tname a, tname b){
+            if(a > b){return a;} else{return b;}
+        });
+    }
+    else if(size1 < size2){
+        transform(vec1.begin(), vec1.end(), vec2.begin(), vec2.begin(), [](tname a, tname b){
+            if(a > b){return a;} else{return b;}
+        });
+        result_f = vec2;
+        // copy(vec2.begin()+size1, vec2.end(), result_f);
+    }
+    else{
+        transform(vec2.begin(), vec2.end(), vec1.begin(), vec1.begin(), [](tname a, tname b){
+            if(a < b){return b;} else{return a;}
+        });
+        result_f = vec1;
+        // copy(vec1.begin()+size2, vec1.end(), result_f);
+    }
+    return result_f;
+}
+
 int main(){
     map<string,string> bad_to_good = {{"word", "Grouped-Letter-Unit"}, {"be", "wasp"}, {"not found", "not appearing"}, {"PlaCe", "LoCation"}};
 
