@@ -58,42 +58,41 @@ struct Trade {
 
 class Exchange {
 	private:
-	map<string, float> assets = {{"BTC", 0}, {"ETH", 0}, {"USD", 0}};
-	map<string, map<string, float>> user_account;
-	vector<Order> open_order;
-  vector<string> trade_history;
-	map<string, vector<Order>> record_open, record_filled;
+		map<string, float> assets = {{"BTC", 0}, {"ETH", 0}, {"USD", 0}};
+		map<string, map<string, float>> user_account;
+		vector<Order> open_order;
+		vector<string> trade_history;
+		map<string, vector<Order>> record_open, record_filled;
 	public:
-	void MakeDeposit(const std::string &username, const std::string &asset,
-					int amount);
-	void PrintUserPortfolios(std::ostream &os) const;
-	bool MakeWithdrawal(const std::string &username, const std::string &asset, int amount);
-	bool AddOrder(const Order &order);
-	bool sale(Order order);
-	bool buy(Order order);
-  // need the copy of order
-	string out_(const Order &order);
-	void delete_open_record(const Order&);
-	void delete_open_order(vector<Order>::iterator);
-	vector<Order>::iterator find_low_price(const Order&);
-	vector<Order>::iterator find_high_price(const Order&);	
-  vector<Order>::iterator find_first_price(const Order&);	
-  vector<Order>::iterator find_record(const Order&);
-	void PrintUsersOrders(std::ostream &os);
-	
-  void sale_order_more(vector<Order>::iterator&, Order&);
-  void sale_order_less(vector<Order>::iterator&, Order&);
-  void sale_same(vector<Order>::iterator&, Order&);
-  void buy_order_less(vector<Order>::iterator&, Order&);
-  void buy_order_more(vector<Order>::iterator&, Order&);
-  void buy_same(vector<Order>::iterator&, Order&);
-  // need to change the order and iterator
-  void PrintTradeHistory(std::ostream &os) const;
-  void add_history(const Order&, const Order&);
-	void PrintBidAskSpread(std::ostream &os) const;
-  int find_low_sell(const string&) const;
-  int find_high_buy(const string&) const;
-  void check_zero(std::ostream &os, int&) const;
+		void MakeDeposit(const std::string &username, const std::string &asset,
+						int amount);
+		void PrintUserPortfolios(std::ostream &os) const;
+		bool MakeWithdrawal(const std::string &username, const std::string &asset, int amount);
+		bool AddOrder(const Order &order);
+		bool sale(Order order);
+		bool buy(Order order);
+		// need the copy of order
+		string out_(const Order &order);
+		void delete_open_record(const Order&);
+		void delete_open_order(vector<Order>::iterator);
+		vector<Order>::iterator find_low_price(const Order&);
+		vector<Order>::iterator find_high_price(const Order&);	
+		vector<Order>::iterator find_first_price(const Order&);	
+		vector<Order>::iterator find_record(const Order&);
+		void PrintUsersOrders(std::ostream &os);	
+		void sale_order_more(vector<Order>::iterator&, Order&);
+		void sale_order_less(vector<Order>::iterator&, Order&);
+		void sale_same(vector<Order>::iterator&, Order&);
+		void buy_order_less(vector<Order>::iterator&, Order&);
+		void buy_order_more(vector<Order>::iterator&, Order&);
+		void buy_same(vector<Order>::iterator&, Order&);
+		// need to change the order and iterator
+		void PrintTradeHistory(std::ostream &os) const;
+		void add_history(const Order&, const Order&);
+		void PrintBidAskSpread(std::ostream &os) const;
+		int find_low_sell(const string&) const;
+		int find_high_buy(const string&) const;
+		void check_zero(std::ostream &os, int&) const;
 };
 
 void Exchange::delete_open_order(vector<Order>::iterator order){
